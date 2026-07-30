@@ -1154,5 +1154,71 @@
     observer.observe(el);
   });
 </script>
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- СКРИПТ: Отправка формы в Google Sheets                           -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<script>
+  // ═══════════════════════════════════════════════════════════════════
+  // ИЗМЕНИТЬ: Вставь сюда URL своего Google Apps Script после настройки
+  // Инструкция ниже в комментариях
+  // ═══════════════════════════════════════════════════════════════════
+  const SCRIPT_URL = 'https://script.google.com/macros/s/ТВОЙ_КОД_ЗДЕСЬ/exec';
+
+  document.getElementById('signupForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    const originalHTML = btn.innerHTML;
+
+    // Показываем состояние загрузки
+    btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:8px;animation:spin 1s linear infinite;"><circle cx="12" cy="12" r="10" stroke-dasharray="60" stroke-dashoffset="20"/></svg>Отправка...';
+    btn.disabled = true;
+    btn.style.opacity = '0.7';
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(data).toString()
+      });
+
+      // Успех
+      btn.innerHTML = '<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:middle;margin-right:6px;"><path d="M20 6L9 17l-5-5"/></svg>Заявка отправлена!';
+      btn.style.background = 'var(--success)';
+      btn.style.boxShadow = '0 4px 24px rgba(34,197,94,0.3)';
+      form.reset();
+
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        btn.style.boxShadow = '';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      }, 4000);
+
+    } catch (err) {
+      btn.innerHTML = 'Ошибка. Попробуй ещё раз';
+      btn.style.background = 'var(--danger)';
+
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+      }, 3000);
+    }
+  });
+
+  // Анимация спиннера
+  const style = document.createElement('style');
+  style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
+  document.head.appendChild(style);
+</script>
+
 </body>
 </html>
