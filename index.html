@@ -972,7 +972,7 @@
       <div class="schedule-row">
         <div class="schedule-info">
           <h4>Последний рейс Газали</h4>
-          <span>Кориолис Третий Горизонт • Будний день, 16-17:00 МСК • 4-5 часов • 450р</span>
+          <span>Кориолис Третий Горизонт • Будний день, 16–17:00 МСК • 4–5 часов • 450₽</span>
         </div>
         <span class="schedule-status status-open">5 мест</span>
       </div>
@@ -980,15 +980,15 @@
       <div class="schedule-row">
         <div class="schedule-info">
           <h4>Небесная машина</h4>
-          <span>Кориолис Великая Тьма • Будний день, 16-17:00 МСК • 4-5 часов • 450р </span>
+          <span>Кориолис Великая Тьма • Будний день, 16–17:00 МСК • 4–5 часов • 450₽</span>
         </div>
         <span class="schedule-status status-open">5 мест</span>
       </div>
 
       <div class="schedule-row">
         <div class="schedule-info">
-          <h4>Очередная охота на жуков </h4>
-          <span>Mothership SCI-FI horror RPG • Будний день, 16-17:00 МСК • 4-5 часов • 500р </span>
+          <h4>Очередная охота на жуков</h4>
+          <span>Mothership SCI-FI horror RPG • Будний день, 16–17:00 МСК • 4–5 часов • 500₽</span>
         </div>
         <span class="schedule-status status-open">5 мест</span>
       </div>
@@ -996,7 +996,7 @@
       <div class="schedule-row">
         <div class="schedule-info">
           <h4>Станция Челюскин</h4>
-          <span>10 свечей • Будний день, 16-17:00 МСК • 4-5 часов • 450р </span>
+          <span>10 свечей • Будний день, 16–17:00 МСК • 4–5 часов • 450₽</span>
         </div>
         <span class="schedule-status status-open">3 места</span>
       </div>
@@ -1053,7 +1053,7 @@
         <!-- ИЗМЕНИТЬ: Зарегистрируйся на https://formspree.io и вставь    -->
         <!-- свой URL в action ниже                                       -->
         <!-- ═══════════════════════════════════════════════════════════ -->
-        <form action="https://script.google.com/macros/s/AKfycbxjy1QKPuF508hbN6GIflmcrJcLdCUW0sxhyVZYX5DHp6nF_T31BjgSeY3ZoRrvYFDjyw/exec" method="POST">
+        <form id="signupForm">
           <div class="form-group">
             <label for="name">Имя / Никнейм</label>
             <input type="text" id="name" name="name" placeholder="Как к тебе обращаться?" required>
@@ -1068,15 +1068,11 @@
             <label for="game">Интересующая игра</label>
             <select id="game" name="game" required>
               <option value="" disabled selected>Выбери из списка</option>
-              <option value="dnd">D&D 3.5 / 5e / 2024</option>
-              <option value="coriolis">Кориолис — Третий Горизонт / Великая Тьма</option>
-              <option value="mothership">Mothership</option>
-              <option value="10candles">10 свечей</option>
-              <option value="morkborg">MÖRK BORG</option>
-              <option value="mouseguard">Мышиная стража</option>
-              <option value="wh40k">Warhammer 40k: Imperium Maledictum</option>
-              <option value="custom">Авторская космоопера</option>
-              <option value="other">Другое / Не знаю</option>
+              <option value="gazali">Последний рейс Газали (Кориолис ТГ)</option>
+              <option value="nebesnaya">Небесная машина (Кориолис ВТ)</option>
+              <option value="zhuki">Очередная охота на жуков (Mothership)</option>
+              <option value="cheluskin">Станция Челюскин (10 свечей)</option>
+              <option value="other">Другая игра / Не знаю</option>
             </select>
           </div>
 
@@ -1113,7 +1109,7 @@
 <footer>
   <p>Сделано с 🚀 для настольных приключений • 2026</p>
   <p style="margin-top:8px; font-size:12px;">
-    <a href="#">Урал</a> — мастер настольно-ролевых игр (Взял идею анкеты у https://sites.google.com/view/yottrpg/home)
+    <a href="#">Урал</a> — мастер настольно-ролевых игр
   </p>
 </footer>
 
@@ -1154,6 +1150,8 @@
     observer.observe(el);
   });
 </script>
+
+
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <!-- СКРИПТ: Отправка формы в Google Sheets                           -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -1162,7 +1160,7 @@
   // ИЗМЕНИТЬ: Вставь сюда URL своего Google Apps Script после настройки
   // Инструкция ниже в комментариях
   // ═══════════════════════════════════════════════════════════════════
-  const SCRIPT_URL = https://script.google.com/macros/s/AKfycbxjy1QKPuF508hbN6GIflmcrJcLdCUW0sxhyVZYX5DHp6nF_T31BjgSeY3ZoRrvYFDjyw/exec;
+  const SCRIPT_URL = 'https://script.google.com/macros/s/ТВОЙ_КОД_ЗДЕСЬ/exec';
 
   document.getElementById('signupForm').addEventListener('submit', async function(e) {
     e.preventDefault();
